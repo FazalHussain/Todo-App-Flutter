@@ -3,6 +3,9 @@ import 'package:todos_app/utils/dbhelper.dart';
 import 'package:todos_app/models/todo.dart';
 import 'package:intl/intl.dart';
 
+/*
+ * Todos Details Screen
+ */
 class TodoDetails extends StatefulWidget {
   final Todo todo;
 
@@ -15,9 +18,15 @@ class TodoDetails extends StatefulWidget {
   State<StatefulWidget> createState() => TodoDetailsState(todo);
 }
 
+/*
+ * Todos Detail State Class
+ */
 class TodoDetailsState extends State {
   Todo todo;
 
+  /*
+   * Constructor
+   */
   TodoDetailsState(this.todo);
 
   final _periorities = ["High", "Medium", "Low"];
@@ -75,14 +84,21 @@ class TodoDetailsState extends State {
               style: textStyle,
               value: _periority,
               onChanged: (String val) {
-                setState(() {
-                  this._periority = val;
-                });
+                _onDropDownChanged(val);
               },
             )
           ],
         ),
       ),
     );
+  }
+
+  /*
+   * Update the dropdown value using setState
+   */
+  void _onDropDownChanged(String val) {
+    setState(() {
+      this._periority = val;
+    });
   }
 }
