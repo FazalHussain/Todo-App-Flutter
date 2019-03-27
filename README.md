@@ -1,6 +1,6 @@
 # todos_app
 
-A new Flutter application.
+Todo Application Demo using flutter in which i have implemented sqflite databse 
 
 ## Getting Started
 
