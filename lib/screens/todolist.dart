@@ -26,7 +26,7 @@ class TodoListState extends State {
       body: todoListItems(),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          navigateToDetails(Todo('','', 3, ''));
+          navigateToDetails(Todo('', '', 3, ''));
         },
         tooltip: "Add new Todo",
         child: Icon(Icons.add),
@@ -34,9 +34,8 @@ class TodoListState extends State {
     );
   }
 
-
   ListView todoListItems() {
-   // ListView is constructed with a build method
+    // ListView is constructed with a build method
     return ListView.builder(
         itemCount: count,
         itemBuilder: (BuildContext context, int position) {
@@ -54,14 +53,15 @@ class TodoListState extends State {
               title: Text(todos[position].title),
               subtitle: Text(todos[position].date),
               onTap: () {
-                debugPrint("Item taped at " + position.toString() +
-                    " is " + todos[position].id.toString());
+                debugPrint("Item taped at " +
+                    position.toString() +
+                    " is " +
+                    todos[position].id.toString());
                 navigateToDetails(todos[position]);
               },
             ),
           );
-        }
-    );
+        });
   }
 
   /*
@@ -98,7 +98,7 @@ class TodoListState extends State {
    * Fetch the color according to the periority
    */
   Color getColor(int periority) {
-    switch(periority) {
+    switch (periority) {
       case 1:
         return Colors.red;
       case 2:
@@ -108,7 +108,6 @@ class TodoListState extends State {
 
       default:
         return Colors.green;
-
     }
   }
 
@@ -116,10 +115,13 @@ class TodoListState extends State {
    * Navigate to details screen by using navigator push
    */
   void navigateToDetails(Todo todo) async {
-    bool check = await Navigator.push(context,
-        MaterialPageRoute(
-            builder: (context) => TodoDetails(todo))
-    );
+    bool result = await Navigator.push(
+        context, MaterialPageRoute(builder: (context) => TodoDetails(todo)));
 
+    // When the user returns back and result is true it means that operation success
+    // update the listing using getData()
+    if (result) {
+      getData();
+    }
   }
 }

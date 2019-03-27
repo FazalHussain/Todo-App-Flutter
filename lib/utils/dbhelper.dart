@@ -109,10 +109,10 @@ class DbHelper {
     /*
      * Update the record in the table
      */
-    Future<int> delete(Todo todo) async {
+    Future<int> delete(int id) async {
       Database db = await this.db;
       var result = await db.delete(tblTodo, where: "$colId = ?",
-          whereArgs: [todo.id]);
+          whereArgs: [id]);
       return result;
     }
     
